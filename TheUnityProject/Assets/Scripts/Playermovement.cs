@@ -24,6 +24,11 @@ public class Playermovement : MonoBehaviour
     public TextMeshProUGUI FinalScore;
     public GameObject AmmoBar;
     public GameObject ScoreTextObject;
+    public int DashCD = 5;
+    public float RemaingDashCD;
+    public int DashLength 5;
+
+
     
     
     public Rigidbody rb;
@@ -42,6 +47,7 @@ public class Playermovement : MonoBehaviour
     void Update()
     {
         Vector3 movement = new Vector3();
+        RemaingDashCD = RemaingDashCD - Time.deltaTime;
         
         
         // direction
@@ -77,6 +83,10 @@ public class Playermovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        if (Input.GetKeyDown(Keycode.Shift))
+        {
+            movement.velocity = movement.velocity * DashLength;
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
