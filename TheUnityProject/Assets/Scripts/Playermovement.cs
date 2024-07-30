@@ -24,14 +24,17 @@ public class Playermovement : MonoBehaviour
     public TextMeshProUGUI FinalScore;
     public GameObject AmmoBar;
     public GameObject ScoreTextObject;
-    public int DashCD = 5;
-    public float RemaingDashCD;
-    public int DashLength 5;
+    public int dashCD = 5;
+    private float RemaingDashCD;
+    public int DashLength = 5;
 
 
     
     
     public Rigidbody rb;
+
+    public global::System.Int32 DashCD { get => dashCD; set => dashCD = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,9 +87,10 @@ public class Playermovement : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-        if (Input.GetKeyDown(Keycode.Shift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && RemaingDashCD <= 0)
         {
-            movement.velocity = movement.velocity * DashLength;
+            movement = movement * DashLength;
+            RemaingDashCD = DashCD;
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
